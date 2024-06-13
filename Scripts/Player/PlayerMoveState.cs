@@ -60,4 +60,29 @@ public partial class PlayerMoveState : CharacterState
             _stateMachine.TransitionTo("Dash");
         }
     }
+    
+    private Vector2 RotateDirectionBasedOnGravity(Vector2 direction, Vector2 gravityVector)
+    {
+        // Rotate direction based on the gravity vector
+        if (gravityVector == Vector2.Right)
+        {
+            // Gravity to the right
+            return new Vector2(direction.Y, -direction.X);
+        }
+        else if (gravityVector == Vector2.Left)
+        {
+            // Gravity to the left
+            return new Vector2(-direction.Y, direction.X);
+        }
+        else if (gravityVector == Vector2.Up)
+        {
+            // Gravity upwards
+            return new Vector2(-direction.X, -direction.Y);
+        }
+        else
+        {
+            // Gravity downwards or other directions
+            return direction;
+        }
+    }
 }
