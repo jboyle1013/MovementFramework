@@ -10,7 +10,8 @@ public partial class Character : CharacterBody2D
     
     
     // Get the gravity from the project settings to be synced with RigidBody nodes.
-    public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
+    [Export(PropertyHint.Range, "-1960,1960,10")] public float gravityMagnitude = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
+    [Export(PropertyHint.Range, "-1,1,.01")] public Vector2 gravityVector = ProjectSettings.GetSetting("physics/2d/default_gravity_vector").AsVector2();
     
     
     public override void _Ready()

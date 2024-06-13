@@ -14,11 +14,12 @@ public partial class EnemyMoveState : CharacterState
     /// <param name="delta">The time elapsed since the last physics frame.</param>
     public override void PhysicsUpdate(double delta)
     {
+        base.PhysicsUpdate(delta);
         Vector2 velocity = _character.Velocity;
 
         // Add the gravity.
         if (!_character.IsOnFloor())
-            velocity.Y -= _character.gravity * (float)delta;
+            velocity.Y -= _gravity.Y * (float)delta;
 
         // Handle Jump.
         if (Input.IsActionJustPressed(GameConstants.Input.Jump))

@@ -11,6 +11,8 @@ public abstract partial class CharacterState : State
     /// </summary>
     protected Character _character;
 
+    protected Vector2 _gravity;
+
     public override void _Ready()
     {
         // Use call_deferred to safely wait for the owner to be ready
@@ -29,6 +31,13 @@ public abstract partial class CharacterState : State
             throw new InvalidProgramException("Player is null in the PlayerState type check.");
         }
     }
+
+    public override void PhysicsUpdate(double delta)
+    {
+        _gravity = _character.gravityVector * _character.gravityMagnitude;
+
+    }
+
     public void _Flip()
     {
         if(_character.Velocity.X != 0)
