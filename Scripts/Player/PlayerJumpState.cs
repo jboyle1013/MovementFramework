@@ -25,7 +25,7 @@ public partial class PlayerJumpState : CharacterState
             {
                 double_jump = true;
             }
-            _character.Velocity = velocity;
+            _character.Velocity = velocity * _character.gravityVector;
         }
     }
 
@@ -43,6 +43,7 @@ public partial class PlayerJumpState : CharacterState
         {
             velocity.Y += _gravity.Y * (float)delta;
             velocity.X += _gravity.X * (float)delta;
+           
             // this turns the acceleration vector of gravity into a velocity vector by multiplying it by time.
             // since (m/t^2) * t = (m/t)
             
@@ -50,21 +51,38 @@ public partial class PlayerJumpState : CharacterState
         else
         {
             double_jump = false;
-            _stateMachine.TransitionTo("Move");
+            if (velocity == Vector2.Zero)
+            {
+                _stateMachine.TransitionTo("Idle");
+            }
+            else
+            {
+                _stateMachine.TransitionTo("Move");
+            }
         }
 
         // Handle horizontal movement during jump
         Vector2 direction = Input.GetVector(GameConstants.Input.MoveLeft, GameConstants.Input.MoveRight, GameConstants.Input.MoveUp, GameConstants.Input.MoveDown);
         if (direction != Vector2.Zero)
         {
-            velocity.X = (direction.X * _character.Speed) + (_gravity.X * (float) delta);
+            velocity.X = (direction.X * _character.Speed);
         }
         else
         {
             velocity.X = Mathf.MoveToward(_character.Velocity.X, 0, _character.Speed);
         }
+        if (_character.IsInGravityZone)
+        {
+            velocity = UtilityScripts.RotateDirectionBasedOnGravity(velocity, _gravity);
+        }
 
         _character.Velocity = velocity;
+       
+        if (velocity == Vector2.Zero)
+        {
+            _stateMachine.TransitionTo("Idle");
+        }
+        
         _character.MoveAndSlide();
     }
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://dwwpmqpxsjqqp"]
+[gd_scene load_steps=71 format=3 uid="uid://dwwpmqpxsjqqp"]
 
 [ext_resource type="Script" path="res://Scripts/Player/Player.cs" id="1_w14ii"]
 [ext_resource type="Texture2D" uid="uid://drajus7jtl8ib" path="res://Assets/Sprites/Characters/Player/Dying/Dying_000.png" id="2_xc3sx"]
@@ -68,7 +68,6 @@
 [ext_resource type="Script" path="res://Scripts/Player/PlayerIdleState.cs" id="66_81yk2"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerMoveState.cs" id="67_xxs44"]
 [ext_resource type="Script" path="res://Scripts/Player/PlayerDashState.cs" id="68_v0d27"]
-[ext_resource type="Script" path="res://Scripts/Player/PlayerJumpState.cs" id="69_8o4fr"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_r5ing"]
 animations = [{
@@ -326,9 +325,6 @@ one_shot = true
 [node name="DashReloadTimer" type="Timer" parent="StateMachine/Dash"]
 wait_time = 1.5
 one_shot = true
-
-[node name="Jump" type="Node" parent="StateMachine"]
-script = ExtResource("69_8o4fr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
