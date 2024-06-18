@@ -13,6 +13,7 @@ public partial class Character : CharacterBody2D
     [Export(PropertyHint.Range, "-1960,1960,10")] public float gravityMagnitude = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
     [Export(PropertyHint.Range, "-1,1,.01")] public Vector2 gravityVector = ProjectSettings.GetSetting("physics/2d/default_gravity_vector").AsVector2();
     public bool IsInGravityZone = false;
+    public bool IsInRotateZone = false;
     
     public override void _Ready()
     {

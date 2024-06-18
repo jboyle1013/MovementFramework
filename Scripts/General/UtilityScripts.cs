@@ -26,7 +26,7 @@ public static class UtilityScripts
         if (gravityVector == Vector2.Right)
         {
             // Gravity to the right
-            return new Vector2(velocity.Y, -velocity.X);
+            return new Vector2(velocity.Y, velocity.X);
         }
         else if (gravityVector == Vector2.Left)
         {
@@ -36,7 +36,7 @@ public static class UtilityScripts
         else if (gravityVector == Vector2.Up)
         {
             // Gravity upwards
-            return new Vector2(-velocity.X, -velocity.Y);
+            return new Vector2(velocity.X, -velocity.Y);
         }
         else
         {

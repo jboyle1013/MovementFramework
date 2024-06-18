@@ -9,6 +9,7 @@ namespace MovementFramework.Scripts.Player
     {
         [Export] protected Timer dashReloadNode;
         private bool double_jump = false;
+        private float nAngle;
 
         public override void EnterState()
         {
@@ -21,6 +22,7 @@ namespace MovementFramework.Scripts.Player
         /// <param name="delta">The time elapsed since the last physics frame.</param>
         public override void PhysicsUpdate(double delta)
         {
+            
             base.PhysicsUpdate(delta);
             Vector2 velocity = _character.Velocity;
 
@@ -29,6 +31,7 @@ namespace MovementFramework.Scripts.Player
             if (direction != Vector2.Zero)
             {
                 velocity.X = direction.X * _character.Speed;
+                
             }
             else
             {
@@ -40,15 +43,6 @@ namespace MovementFramework.Scripts.Player
                 velocity = UtilityScripts.RotateDirectionBasedOnGravity(velocity, _gravity);
             }
 
-            _character.Velocity = velocity;
-
-            if (velocity == Vector2.Zero)
-            {
-                _stateMachine.TransitionTo("Idle");
-            }
-            
-
-
             // Handle Jump
             if (Input.IsActionJustPressed(GameConstants.Input.Jump))
             {
@@ -59,20 +53,20 @@ namespace MovementFramework.Scripts.Player
                     {
                         double_jump = true;
                     }
-                    _character.Velocity = velocity;
                 }
             }
+            
             // Add the gravity.
             if (!_character.IsOnFloor () )
             {
                 velocity += _gravity * (float) delta;
-                GD.Print(velocity);
             }   
             else
             {
                 double_jump = false;
             }
-
+    
+            
             _character.Velocity = velocity;
             _character.MoveAndSlide();
             _character.SpriteNode.Play(GameConstants.PlayerAnimation.AnimMoving);
@@ -87,6 +81,7 @@ namespace MovementFramework.Scripts.Player
                 _stateMachine.TransitionTo("Dash");
             }
         }
+
         
     }
 }

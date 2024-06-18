@@ -5,7 +5,7 @@ using MovementFramework.Scripts.Player;
 using MovementFramework.Scripts.General;
 
 
-public partial class gravity_zone : Area2D
+public partial class AntiGravity : Area2D
 {
 	[Export(PropertyHint.Range, "-1960,1960,10")]
 	public float NewGravityMagnitude = 1000f; // Default magnitude
@@ -33,8 +33,8 @@ public partial class gravity_zone : Area2D
 		character.IsInGravityZone = true;
 
 		GD.Print("Entered Gravity Zone");
-		character.gravityVector.X = 0;
-		character.gravityVector.Y = -1;
+		character.gravityVector = gravityVector;
+		
 		character.SpriteNode.FlipV = true;
 
 	}

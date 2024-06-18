@@ -35,7 +35,6 @@ public abstract partial class CharacterState : State
     public override void PhysicsUpdate(double delta)
     {
         _gravity = _character.gravityVector * _character.gravityMagnitude;
-        GD.Print(_gravity);
         _character.UpDirection = -_character.gravityVector;
 
     }

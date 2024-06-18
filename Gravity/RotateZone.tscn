@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpbl5q5c8bc0h"]
+
+[ext_resource type="Script" path="res://Scripts/Gravity_Effery/RotateZone.cs" id="1_hxaon"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tra74"]
+size = Vector2(1154, 659)
+
+[node name="Rotate Zone" type="Area2D"]
+script = ExtResource("1_hxaon")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(576, 320.5)
+shape = SubResource("RectangleShape2D_tra74")
